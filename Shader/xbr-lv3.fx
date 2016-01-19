@@ -10,8 +10,10 @@
 
 /*
    Hyllian's xBR-lv3 Shader
+   Port to HLSL, for Dungeon And Fighter Project.
    
    Copyright (C) 2011-2015 Hyllian - sergiogdb@gmail.com
+   Copyright (C) NEOPLE Corporation. All Rights Reserved.
 
    Permission is hereby granted, free of charge, to any person obtaining a copy
    of this software and associated documentation files (the "Software"), to deal
@@ -34,6 +36,12 @@
 
    Incorporates some of the ideas from SABR shader. Thanks to Joshua Street.
 */
+
+// Uncomment just one of the three params below to choose the corner detection
+//#define CORNER_A
+//#define CORNER_B
+//#define CORNER_C
+#define CORNER_D
 
 const static float3x3 yuv          = float3x3(0.299, 0.587, 0.114, -0.169, -0.331, 0.499, 0.499, -0.418, -0.0813);
 const static float4 delta         = float4(0.4, 0.4, 0.4, 0.4);
@@ -232,11 +240,14 @@ float4 main_fragment(PS_INPUT VAR) : COLOR
 // It uses CORNER_C if none of the others are defined.
 #ifdef CORNER_A
 	interp_restriction_lv1      = ((e!=f) && (e!=h));
-#elif CORNER_B
+#endif
+#ifdef CORNER_B
 	interp_restriction_lv1      = ((e!=f) && (e!=h)  &&  ( !eq(f,b) && !eq(h,d) || eq(e,i) && !eq(f,i4) && !eq(h,i5) || eq(e,g) || eq(e,c) ) );
-#elif CORNER_D
+#endif
+#ifdef CORNER_D
 	interp_restriction_lv1      = ((e!=f) && (e!=h)  &&  ( !eq(f,b) && !eq(h,d) || eq(e,i) && !eq(f,i4) && !eq(h,i5) || eq(e,g) || eq(e,c) ) && (f!=f4 && f!=i || h!=h5 && h!=i || h!=g || f!=c || eq(b,c1) && eq(d,g0)));
-#else
+#endif
+#ifdef CORNER_C
 	interp_restriction_lv1      = ((e!=f) && (e!=h)  && ( !eq(f,b) && !eq(f,c) || !eq(h,d) && !eq(h,g) || eq(e,i) && (!eq(f,f4) && !eq(f,i4) || !eq(h,h5) && !eq(h,i5)) || eq(e,g) || eq(e,c)) );
 #endif
 	interp_restriction_lv2_left = ((e!=g) && (d!=g));
