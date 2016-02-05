@@ -11,7 +11,7 @@
    Port to HLSL, for Dungeon And Fighter Project.
    
    Copyright (C) 2011-2014 Hyllian - sergiogdb@gmail.com
-   Copyright (C) NEOPLE Corporation. All Rights Reserved.
+   Copyright (C) 2015-2016, NEOPLE Corporation. Morph - morph@neople.co.kr
 
    Permission is hereby granted, free of charge, to any person obtaining a copy
    of this software and associated documentation files (the "Software"), to deal
